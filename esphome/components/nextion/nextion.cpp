@@ -511,11 +511,9 @@ void Nextion::process_nextion_commands_() {
         NextionQueue *nb = this->nextion_queue_.front();
         NextionComponentBase *component = nb->component;
 
-        ESP_LOGI(TAG, "Received string response: \"%s\"", to_process.c_str());
-
         if (component->get_queue_type() != NextionQueueType::TEXT_SENSOR) {
-          ESP_LOGE(TAG, "ERROR: Received string return but next in queue \"%s\" is not a text sensor",
-                   component->get_variable_name().c_str());
+          ESP_LOGE(TAG, "ERROR: Received string return \"%s\" but next in queue \"%s\" is not a text sensor",
+                   to_process.c_str(), component->get_variable_name().c_str());
         } else {
           ESP_LOGN(TAG, "Received get_string response: \"%s\" for component id: %s, type: %s", to_process.c_str(),
                    component->get_variable_name().c_str(), component->get_queue_type_string().c_str());
@@ -556,13 +554,12 @@ void Nextion::process_nextion_commands_() {
         NextionQueue *nb = this->nextion_queue_.front();
         NextionComponentBase *component = nb->component;
 
-        ESP_LOGI(TAG, "Received number response: \"%d\"", value);
 
         if (component->get_queue_type() != NextionQueueType::SENSOR &&
             component->get_queue_type() != NextionQueueType::BINARY_SENSOR &&
             component->get_queue_type() != NextionQueueType::SWITCH) {
-          ESP_LOGE(TAG, "ERROR: Received numeric return but next in queue \"%s\" is not a valid sensor type %d",
-                   component->get_variable_name().c_str(), component->get_queue_type());
+          ESP_LOGE(TAG, "ERROR: Received numeric return \"%d\" but next in queue \"%s\" is not a valid sensor type %d",
+                   value, component->get_variable_name().c_str(), component->get_queue_type());
         } else {
           ESP_LOGN(TAG, "Received numeric return for variable %s, queue type %d:%s, value %d",
                    component->get_variable_name().c_str(), component->get_queue_type(),
