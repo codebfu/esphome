@@ -556,7 +556,7 @@ void Nextion::process_nextion_commands_() {
         NextionQueue *nb = this->nextion_queue_.front();
         NextionComponentBase *component = nb->component;
 
-        ESP_LOGI(TAG, "Received string response: \"%d\"", value);
+        ESP_LOGI(TAG, "Received number response: \"%d\"", value);
 
         if (component->get_queue_type() != NextionQueueType::SENSOR &&
             component->get_queue_type() != NextionQueueType::BINARY_SENSOR &&
