@@ -24,6 +24,7 @@
 #include <esp_http_client.h>
 #endif  // ARDUINO vs USE_ESP_IDF
 #endif  // USE_NEXTION_TFT_UPLOAD
+#define NEXTION_PROTOCOL_LOG
 
 namespace esphome {
 namespace nextion {
