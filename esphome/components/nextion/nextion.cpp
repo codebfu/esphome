@@ -511,6 +511,8 @@ void Nextion::process_nextion_commands_() {
         NextionQueue *nb = this->nextion_queue_.front();
         NextionComponentBase *component = nb->component;
 
+        ESP_LOGI(TAG, "Received string response: \"%s\"", to_process.c_str());
+
         if (component->get_queue_type() != NextionQueueType::TEXT_SENSOR) {
           ESP_LOGE(TAG, "ERROR: Received string return but next in queue \"%s\" is not a text sensor",
                    component->get_variable_name().c_str());
